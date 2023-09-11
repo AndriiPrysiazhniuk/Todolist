@@ -2,6 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterValuesType} from "../App";
 import styles from '../todolist.module.css'
 import {AddItemForm} from "./AddItemForm";
+import {EditableSpan} from "./EditableSpan";
 
 export type TaskType = {
     id: string
@@ -12,6 +13,8 @@ type PropsType = {
     title: string
     id: string
     changeTaskStatus: (todolistId: string, taskId: string, isDone: boolean) => void
+    changeTaskTitle: (todolistId: string, taskId: string, newTitle: string) => void
+    changeTodolistTitle:(todolistId:string, newTitle:string)=>void
     addTask: (todolistId: string, title: string) => void
     removeTask: (todolistId: string, taskId: string) => void
     changeFilter: (todolistId: string, filter: FilterValuesType) => void
@@ -24,6 +27,8 @@ export const Todolist = (props: PropsType) => {
         title,
         id,
         changeTaskStatus,
+        changeTodolistTitle,
+        changeTaskTitle,
         addTask,
         removeTask,
         changeFilter,
@@ -42,12 +47,17 @@ export const Todolist = (props: PropsType) => {
     const removeTodolistHandler = () => {
         removeTodolist(id)
     }
-
+const changeTodolistTitleHandler=(newTitle:string)=>{
+changeTodolistTitle(id, newTitle)
+}
     return (
         <div>
-            <h3>{props.title}
+            {/*<h3>{props.title}</h3>*/}
+            <div>
+                <EditableSpan value={title} onChange={changeTodolistTitleHandler}/>
                 <button onClick={removeTodolistHandler}>X</button>
-            </h3>
+            </div>
+
             <AddItemForm addItem={addTaskHandler}/>
             <ul>
                 {tasks.map((el) => {
@@ -58,11 +68,13 @@ export const Todolist = (props: PropsType) => {
 
                         changeTaskStatus(props.id, el.id, el.isDone)
                     }
-
+                    const changeTaskTitleHandler = (newTitle: string) => {
+                        changeTaskTitle(props.id, el.id, newTitle)
+                    }
                     return (
                         <li key={el.id} className={el.isDone ? styles.isDone : ''}>
                             <input onChange={changeTaskStatusHandler} type="checkbox" checked={el.isDone}/>
-                            <span>{el.title}</span>
+                            <EditableSpan onChange={changeTaskTitleHandler} value={el.title}/>
                             <button onClick={removeTaskHandler}>✖️</button>
 
                         </li>
