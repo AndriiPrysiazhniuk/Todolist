@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterValuesType} from "../App";
 import styles from '../todolist.module.css'
+import {AddItemForm} from "./AddItemForm";
 
 export type TaskType = {
     id: string
@@ -30,48 +31,24 @@ export const Todolist = (props: PropsType) => {
         filter,
         tasks
     } = props
-    const [inputValue, setInputValue] = useState('')
-    const [error, setError] = useState<string | null>(null)
 
-    const handleInputChanges = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.currentTarget.value)
-        setError(null)
-    }
-    const addTaskHandler = () => {
-        if (inputValue.trim() !== '') {
-            addTask(props.id, inputValue.trim())
-            setInputValue('')
-        } else {
-            setError('Title is Required 😣')
-        }
-    }
-    const onEnterPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && inputValue.trim() !== '') {
-            addTask(props.id, inputValue.trim())
-            setInputValue('')
-        } else {
-            setError('Title is Required 😣')
-        }
-    }
+
     const onFilterBtnClickHandler = (filter: FilterValuesType) => {
         changeFilter(id, filter)
     }
-
+    const addTaskHandler = (title: string) => {
+        addTask(props.id, title)
+    }
     const removeTodolistHandler = () => {
-        props.removeTodolist(id)
+        removeTodolist(id)
     }
 
     return (
         <div>
-            <h3>{props.title }
+            <h3>{props.title}
                 <button onClick={removeTodolistHandler}>X</button>
             </h3>
-            <div>
-                <input className={error ? styles.error : ''} onKeyDown={onEnterPressHandler}
-                       onChange={handleInputChanges} value={inputValue}/>
-                <button onClick={addTaskHandler}>+</button>
-                <p className={error ? styles.errorMessage : ''}>{error}</p>
-            </div>
+            <AddItemForm addItem={addTaskHandler}/>
             <ul>
                 {tasks.map((el) => {
                     const removeTaskHandler = () => {
@@ -107,3 +84,4 @@ export const Todolist = (props: PropsType) => {
         </div>
     )
 }
+
