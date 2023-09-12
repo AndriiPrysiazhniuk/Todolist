@@ -98,7 +98,6 @@ function App() {
                               changeTodolistTitle={changeTodolistTitle}
                               removeTodolist={removeTodolist}
                               filter={el.filter}/>
-
                 )
             })}
 
