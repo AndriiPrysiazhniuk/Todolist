@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper/Paper';
 
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
-type TodolistType = {
+export type TodolistType = {
     id: string
     title: string
     filter: FilterValuesType
@@ -95,10 +95,9 @@ function App() {
                         if (el.filter === 'completed') {
                             tasksForTodolist = tasksForTodolist.filter(el => el.isDone)
                         }
-                        return (<Grid item>
+                        return (<Grid item key={el.id}>
                                 <Paper style={{padding: '10px'}}>
-                                    <Todolist key={el.id}
-                                              id={el.id}
+                                    <Todolist id={el.id}
                                               title={el.title}
                                               tasks={tasksForTodolist}
                                               removeTask={removeTask}
