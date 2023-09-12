@@ -1,5 +1,7 @@
 import styles from "../todolist.module.css";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {Button, IconButton, TextField} from "@mui/material";
+import {AddBox} from "@mui/icons-material";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -11,7 +13,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     const [error, setError] = useState<string | null>(null)
     const onEnterPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && inputValue.trim() !== '') {
-            addItem( inputValue.trim())
+            addItem(inputValue.trim())
             setInputValue('')
         } else {
             setError('Title is Required 😣')
@@ -23,7 +25,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     }
     const addTaskHandler = () => {
         if (inputValue.trim() !== '') {
-            addItem( inputValue.trim())
+            addItem(inputValue.trim())
             setInputValue('')
         } else {
             setError('Title is Required 😣')
@@ -31,10 +33,14 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     }
     return (
         <div>
-            <input className={error ? styles.error : ''} onKeyDown={onEnterPressHandler}
-                   onChange={handleInputChanges} value={inputValue}/>
-            <button onClick={addTaskHandler}>+</button>
-            <p className={error ? styles.errorMessage : ''}>{error}</p>
+            <TextField error={!!error} onKeyDown={onEnterPressHandler}
+                       onChange={handleInputChanges}
+                       value={inputValue} variant={'outlined'} label={'title'} helperText={error} size={'small'}/>
+            <IconButton color={'primary'}
+                        onClick={addTaskHandler}>
+                <AddBox/>
+            </IconButton>
+            {/*<p className={error ? styles.errorMessage : ''}>{error}</p>*/}
         </div>
     )
 }

@@ -3,6 +3,8 @@ import {FilterValuesType} from "../App";
 import styles from '../todolist.module.css'
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import {Button, Checkbox, IconButton} from "@mui/material";
+import {Delete} from "@mui/icons-material";
 
 export type TaskType = {
     id: string
@@ -14,7 +16,7 @@ type PropsType = {
     id: string
     changeTaskStatus: (todolistId: string, taskId: string, isDone: boolean) => void
     changeTaskTitle: (todolistId: string, taskId: string, newTitle: string) => void
-    changeTodolistTitle:(todolistId:string, newTitle:string)=>void
+    changeTodolistTitle: (todolistId: string, newTitle: string) => void
     addTask: (todolistId: string, title: string) => void
     removeTask: (todolistId: string, taskId: string) => void
     changeFilter: (todolistId: string, filter: FilterValuesType) => void
@@ -47,19 +49,20 @@ export const Todolist = (props: PropsType) => {
     const removeTodolistHandler = () => {
         removeTodolist(id)
     }
-const changeTodolistTitleHandler=(newTitle:string)=>{
-changeTodolistTitle(id, newTitle)
-}
+    const changeTodolistTitleHandler = (newTitle: string) => {
+        changeTodolistTitle(id, newTitle)
+    }
     return (
         <div>
-            {/*<h3>{props.title}</h3>*/}
-            <div>
+            <h3>
                 <EditableSpan value={title} onChange={changeTodolistTitleHandler}/>
-                <button onClick={removeTodolistHandler}>X</button>
-            </div>
+                <IconButton onClick={removeTodolistHandler}>
+                    <Delete/>
+                </IconButton>
+            </h3>
 
             <AddItemForm addItem={addTaskHandler}/>
-            <ul>
+            <div>
                 {tasks.map((el) => {
                     const removeTaskHandler = () => {
                         removeTask(props.id, el.id)
@@ -72,26 +75,30 @@ changeTodolistTitle(id, newTitle)
                         changeTaskTitle(props.id, el.id, newTitle)
                     }
                     return (
-                        <li key={el.id} className={el.isDone ? styles.isDone : ''}>
-                            <input onChange={changeTaskStatusHandler} type="checkbox" checked={el.isDone}/>
-                            <EditableSpan onChange={changeTaskTitleHandler} value={el.title}/>
-                            <button onClick={removeTaskHandler}>✖️</button>
+                        <div key={el.id} className={el.isDone ? styles.isDone : ''}>
+                            <Checkbox onChange={changeTaskStatusHandler} checked={el.isDone}/>
 
-                        </li>
+                            <EditableSpan onChange={changeTaskTitleHandler} value={el.title}/>
+
+                            <IconButton onClick={removeTaskHandler}>
+                                <Delete/>
+                            </IconButton>
+
+                        </div>
                     )
                 })}
 
-            </ul>
+            </div>
             <div>
-                <button className={filter === 'all' ? styles.activeFilter : ''}
-                        onClick={() => onFilterBtnClickHandler('all')}>All
-                </button>
-                <button className={filter === 'active' ? styles.activeFilter : ''}
-                        onClick={() => onFilterBtnClickHandler('active')}>Active
-                </button>
-                <button className={filter === 'completed' ? styles.activeFilter : ''}
-                        onClick={() => onFilterBtnClickHandler('completed')}>Completed
-                </button>
+                <Button variant={filter === 'all' ? 'outlined' : 'text'}
+                        color={'inherit'} onClick={() => onFilterBtnClickHandler('all')}>All
+                </Button>
+                <Button variant={filter === 'active' ? 'outlined' : 'text'}
+                        color={'primary'} onClick={() => onFilterBtnClickHandler('active')}>Active
+                </Button>
+                <Button variant={filter === 'completed' ? 'outlined' : 'text'}
+                        color={'error'} onClick={() => onFilterBtnClickHandler('completed')}>Completed
+                </Button>
             </div>
         </div>
     )
