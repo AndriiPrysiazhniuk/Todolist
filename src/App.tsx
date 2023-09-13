@@ -82,6 +82,10 @@ function App() {
             <Header/>
             <Container fixed>
                 <Grid container style={{padding:'20px'}}>
+<<<<<<< HEAD
+=======
+
+>>>>>>> aad54870e7e1c8c5d77cb75c3e55744128cd9e1a
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
                 <Grid container spacing={3}>
