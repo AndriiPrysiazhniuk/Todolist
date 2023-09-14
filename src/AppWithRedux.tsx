@@ -39,7 +39,7 @@ export const AppWithRedux = () => {
         dispatch(addTaskAC(todolistId, title))
     }
     const changeTaskStatus = (todolistId: string, taskId: string, newIsDone: boolean) => {
-        dispatch(changeTaskStatusAC(todolistId, taskId, newIsDone))
+        dispatch(changeTaskStatusAC(todolistId, taskId, !newIsDone))
     }
     const changeTaskTitle = (todolistId: string, taskId: string, newTitle: string) => {
         dispatch(changeTaskTitleAC(todolistId, taskId, newTitle))

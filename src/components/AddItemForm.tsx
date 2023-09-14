@@ -1,4 +1,4 @@
-import styles from "../todolist.module.css";
+
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {Button, IconButton, TextField} from "@mui/material";
 import {AddBox} from "@mui/icons-material";
@@ -38,8 +38,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
                        onChange={handleInputChanges}
                        value={inputValue}
                        variant={'outlined'}
-                       label={'title'}
-                       helperText={error}
+                       label={error ? error : 'Type your task'}
                        size={'small'}/>
             <IconButton color={'primary'}
                         onClick={addTaskHandler}>

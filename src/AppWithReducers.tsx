@@ -55,7 +55,7 @@ export const AppWithReducers = () => {
         dispatchToTasks(addTaskAC(todolistId, title))
     }
     const changeTaskStatus = (todolistId: string, taskId: string, newIsDone: boolean) => {
-        dispatchToTasks(changeTaskStatusAC(todolistId, taskId, newIsDone))
+        dispatchToTasks(changeTaskStatusAC(todolistId, taskId, !newIsDone))
     }
     const changeTaskTitle = (todolistId: string, taskId: string, newTitle: string) => {
         dispatchToTasks(changeTaskTitleAC(todolistId, taskId, newTitle))

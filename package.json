@@ -1,6 +1,7 @@
 {
   "name": "1-lesson",
   "version": "0.1.0",
+  "homepage": "https://AndriiPrysiazhniuk.github.io/Todolist",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -15,6 +16,7 @@
     "@types/react": "^18.0.23",
     "@types/react-dom": "^18.0.7",
     "@types/uuid": "^9.0.3",
+    "gh-pages": "^6.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
@@ -25,6 +27,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
