@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/*
-=======
->>>>>>> aad54870e7e1c8c5d77cb75c3e55744128cd9e1a
 .App {
   padding: 30px;
   display: flex;
@@ -10,23 +6,3 @@
 .App > div {
   margin-right: 50px;
 }
-<<<<<<< HEAD
-
-.error {
-  border: red 1px solid;
-}
-
-.error-message {
-  color: red;
-}
-
-.active-filter {
-  background-color: aquamarine;
-}
-
-.is-done {
-  opacity: 0.5;
-}
-*/
-=======
->>>>>>> aad54870e7e1c8c5d77cb75c3e55744128cd9e1a

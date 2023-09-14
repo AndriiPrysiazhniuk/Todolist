@@ -60,10 +60,7 @@ export const Todolist = (props: PropsType) => {
                     <Delete/>
                 </IconButton>
             </h3>
-<<<<<<< HEAD
-=======
 
->>>>>>> aad54870e7e1c8c5d77cb75c3e55744128cd9e1a
             <AddItemForm addItem={addTaskHandler}/>
             <div>
                 {tasks.map((el) => {
@@ -71,10 +68,7 @@ export const Todolist = (props: PropsType) => {
                         removeTask(props.id, el.id)
                     }
                     const changeTaskStatusHandler = () => {
-<<<<<<< HEAD
-=======
 
->>>>>>> aad54870e7e1c8c5d77cb75c3e55744128cd9e1a
                         changeTaskStatus(props.id, el.id, el.isDone)
                     }
                     const changeTaskTitleHandler = (newTitle: string) => {
@@ -83,13 +77,9 @@ export const Todolist = (props: PropsType) => {
                     return (
                         <div key={el.id} className={el.isDone ? styles.isDone : ''}>
                             <Checkbox onChange={changeTaskStatusHandler} checked={el.isDone}/>
-<<<<<<< HEAD
-                            <EditableSpan onChange={changeTaskTitleHandler} value={el.title}/>
-=======
 
                             <EditableSpan onChange={changeTaskTitleHandler} value={el.title}/>
 
->>>>>>> aad54870e7e1c8c5d77cb75c3e55744128cd9e1a
                             <IconButton onClick={removeTaskHandler}>
                                 <Delete/>
                             </IconButton>
@@ -97,10 +87,7 @@ export const Todolist = (props: PropsType) => {
                         </div>
                     )
                 })}
-<<<<<<< HEAD
-=======
 
->>>>>>> aad54870e7e1c8c5d77cb75c3e55744128cd9e1a
             </div>
             <div>
                 <Button variant={filter === 'all' ? 'outlined' : 'text'}

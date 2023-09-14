@@ -23,11 +23,5 @@ export const Header = () => {
                 <Button color="inherit">Login</Button>
             </Toolbar>
         </AppBar>
-<<<<<<< HEAD
-    );
-};
-
-=======
     )
 }
->>>>>>> aad54870e7e1c8c5d77cb75c3e55744128cd9e1a
