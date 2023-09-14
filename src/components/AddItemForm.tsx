@@ -33,9 +33,14 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     }
     return (
         <div>
-            <TextField error={!!error} onKeyDown={onEnterPressHandler}
+            <TextField error={!!error}
+                       onKeyDown={onEnterPressHandler}
                        onChange={handleInputChanges}
-                       value={inputValue} variant={'outlined'} label={'title'} helperText={error} size={'small'}/>
+                       value={inputValue}
+                       variant={'outlined'}
+                       label={'title'}
+                       helperText={error}
+                       size={'small'}/>
             <IconButton color={'primary'}
                         onClick={addTaskHandler}>
                 <AddBox/>
