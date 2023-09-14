@@ -28,7 +28,10 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
         }
     }
     return editMode
-        ? <TextField type="text" onChange={onChangeInputHandler} value={title} onKeyDown={activateViewModeOnClick}
+        ? <TextField type="text"
+                     onChange={onChangeInputHandler}
+                     value={title}
+                     onKeyDown={activateViewModeOnClick}
                      onBlur={activateViewMode}
                      autoFocus/>
         : <span onDoubleClick={setEditModeHandler}>{value}</span>
