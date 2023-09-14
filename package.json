@@ -1,4 +1,29 @@
 {
+<<<<<<< HEAD
+  "name": "it-incubator-todolist-ts",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.10",
+    "@mui/styled-engine-sc": "^5.10.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.2.0",
+    "@types/node": "^18.11.0",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@types/uuid": "^8.3.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "styled-components": "^5.3.6",
+    "typescript": "~4.8.4",
+    "uuid": "^9.0.0"
+=======
   "name": "1-lesson",
   "version": "0.1.0",
   "private": true,
@@ -21,6 +46,7 @@
     "typescript": "^4.8.4",
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
+>>>>>>> aad54870e7e1c8c5d77cb75c3e55744128cd9e1a
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,10 +55,14 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+<<<<<<< HEAD
+    "extends": "react-app"
+=======
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+>>>>>>> aad54870e7e1c8c5d77cb75c3e55744128cd9e1a
   },
   "browserslist": {
     "production": [
