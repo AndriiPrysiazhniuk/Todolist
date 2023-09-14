@@ -26,7 +26,7 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-function App() {
+export const AppWithReducers = () => {
     let todolistID1 = v1()
     let todolistID2 = v1()
 
@@ -116,4 +116,4 @@ function App() {
     );
 }
 
-export default App;
+

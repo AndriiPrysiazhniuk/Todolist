@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 import {TaskType, Todolist} from "./components/Todolist";
 import {v1} from "uuid";
@@ -7,6 +7,14 @@ import {Header} from "./components/Header";
 import Container from '@mui/material/Container/Container';
 import Grid from '@mui/material/Grid/Grid';
 import Paper from '@mui/material/Paper/Paper';
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./reducers/tasks-reducer";
+import {
+    addTodolistAC,
+    changeTodolistFilterAC,
+    changeTodolistTitleAC,
+    removeTodolistAC,
+    todolistsReducer
+} from "./reducers/todolist-reducer";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 export type TodolistType = {
@@ -18,15 +26,16 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-export const App = () => {
+export const AppWithRedux=()=> {
     let todolistID1 = v1()
     let todolistID2 = v1()
 
-    let [todolists, setTodolists] = useState<Array<TodolistType>>([
+
+    let [todolists, dispatchToTodolists] = useReducer(todolistsReducer, [
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
-    let [tasks, setTasks] = useState<TasksStateType>({
+    let [tasks, dispatchToTasks] = useReducer(tasksReducer, {
         [todolistID1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
             {id: v1(), title: 'JS', isDone: true},
@@ -40,41 +49,32 @@ export const App = () => {
     })
 
     const removeTask = (todolistId: string, taskId: string) => {
-        setTasks({...tasks, [todolistId]: tasks[todolistId].filter(el => el.id !== taskId)})
+        dispatchToTasks(removeTaskAC(todolistId, taskId))
     }
     const addTask = (todolistId: string, title: string) => {
-        const newTask = {id: v1(), title: title, isDone: false}
-        tasks[todolistId] = [newTask, ...tasks[todolistId]]
-        setTasks({...tasks})
+        dispatchToTasks(addTaskAC(todolistId, title))
     }
     const changeTaskStatus = (todolistId: string, taskId: string, newIsDone: boolean) => {
-        setTasks({
-            ...tasks,
-            [todolistId]: tasks[todolistId].map(el => el.id === taskId ? {...el, isDone: !newIsDone} : el)
-        })
-    }
-    const changeFilter = (todolistId: string, filterValue: FilterValuesType) => {
-        setTodolists(todolists.map(el => (el.id === todolistId ? {...el, filter: filterValue} : el)))
-    }
-
-    const removeTodolist = (todolistId: string) => {
-        setTodolists(todolists.filter(el => el.id !== todolistId))
-    }
-    const addTodolist = (title: string) => {
-        const newTodolistId = v1()
-        const newTodolist: TodolistType = {id: newTodolistId, title: title, filter: 'all'}
-        setTodolists([...todolists, newTodolist])
-        setTasks({...tasks, [newTodolistId]: []})
+        dispatchToTasks(changeTaskStatusAC(todolistId, taskId, newIsDone))
     }
     const changeTaskTitle = (todolistId: string, taskId: string, newTitle: string) => {
-        setTasks({
-            ...tasks,
-            [todolistId]: tasks[todolistId].map(el => el.id === taskId ? {...el, title: newTitle} : el)
-        })
+        dispatchToTasks(changeTaskTitleAC(todolistId, taskId, newTitle))
+    }
+    const changeFilter = (todolistId: string, filterValue: FilterValuesType) => {
+        dispatchToTodolists(changeTodolistFilterAC(todolistId, filterValue))
+    }
+    const removeTodolist = (todolistId: string) => {
+        dispatchToTodolists(removeTodolistAC(todolistId))
     }
     const changeTodolistTitle = (todolistId: string, newTitle: string) => {
-        setTodolists(todolists.map(el => el.id === todolistId ? {...el, title: newTitle} : el))
+        dispatchToTodolists(changeTodolistTitleAC(todolistId, newTitle))
     }
+    const addTodolist = (title: string) => {
+        const action = addTodolistAC(title)
+        dispatchToTodolists(action)
+        dispatchToTasks(action)
+    }
+
     return (
         <div>
             <Header/>
