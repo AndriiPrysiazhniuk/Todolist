@@ -23,8 +23,8 @@ export const TasksList = (props: PropsType) => {
     const changeTaskStatusHandler = useCallback(() => {
         changeTaskStatus(todolistId, taskId, isDone)
     }, [changeTaskStatus, isDone, todolistId, taskId])
-    const changeTaskTitleHandler = useCallback(() => {
-        changeTaskTitle(todolistId, taskId, title)
+    const changeTaskTitleHandler = useCallback((newTitle:string) => {
+        changeTaskTitle(todolistId, taskId, newTitle)
     }, [changeTaskTitle, title, todolistId, taskId])
     return (
         <div className={isDone ? styles.isDone : ''}>
