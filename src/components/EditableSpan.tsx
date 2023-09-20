@@ -10,9 +10,8 @@ export const EditableSpan = React.memo((props: EditableSpanPropsType) => {
     const {value, onChange} = props
     const [editMode, setEditMode] = useState(false)
     const [title, setTitle] = useState(value)
-    const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-    }
+    const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
+
     const setEditModeHandler = () => {
         setEditMode(true)
         setTitle(value)

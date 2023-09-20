@@ -2,7 +2,6 @@ import {TasksStateType} from "../App";
 import {v1} from "uuid";
 import {AddTodolistACType, RemoveTodolistACType} from "./todolist-reducer";
 
-
 type ActionType =
     RemoveTaskACType
     | AddTaskType
@@ -56,22 +55,20 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
     }
 }
 
-type RemoveTaskACType = ReturnType<typeof removeTaskAC>
 export const removeTaskAC = (todolistId: string, taskId: string) => {
     return {type: 'REMOVE-TASK', todolistId, taskId} as const
 }
-
-type AddTaskType = ReturnType<typeof addTaskAC>
 export const addTaskAC = (todolistId: string, title: string) => {
     return {type: 'ADD-TASK', todolistId, title} as const
 }
-
-type ChangeTaskStatusACType = ReturnType<typeof changeTaskStatusAC>
 export const changeTaskStatusAC = (todolistId: string, taskId: string, isDone: boolean) => {
     return {type: 'CHANGE-TASK-STATUS', todolistId, taskId, isDone} as const
 }
-
-type ChangeTaskTitleACType = ReturnType<typeof changeTaskTitleAC>
 export const changeTaskTitleAC = (todolistId: string, taskId: string, title: string) => {
     return {type: 'CHANGE-TASK-TITLE', todolistId, taskId, title} as const
 }
+
+type RemoveTaskACType = ReturnType<typeof removeTaskAC>
+type AddTaskType = ReturnType<typeof addTaskAC>
+type ChangeTaskStatusACType = ReturnType<typeof changeTaskStatusAC>
+type ChangeTaskTitleACType = ReturnType<typeof changeTaskTitleAC>

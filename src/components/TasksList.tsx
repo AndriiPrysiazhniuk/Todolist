@@ -17,25 +17,16 @@ type PropsType = {
 export const TasksList = (props: PropsType) => {
     const {isDone, title, todolistId, taskId, removeTask, changeTaskStatus, changeTaskTitle} = props
 
-    const removeTaskHandler = useCallback(() => {
-        removeTask(todolistId, taskId)
-    }, [removeTask, todolistId, taskId])
-    const changeTaskStatusHandler = useCallback(() => {
-        changeTaskStatus(todolistId, taskId, isDone)
-    }, [changeTaskStatus, isDone, todolistId, taskId])
-    const changeTaskTitleHandler = useCallback((newTitle:string) => {
-        changeTaskTitle(todolistId, taskId, newTitle)
-    }, [changeTaskTitle, title, todolistId, taskId])
+    const removeTaskHandler = useCallback(() => removeTask(todolistId, taskId), [removeTask, todolistId, taskId])
+    const changeTaskStatusHandler = useCallback(() => changeTaskStatus(todolistId, taskId, isDone), [changeTaskStatus, isDone, todolistId, taskId])
+    const changeTaskTitleHandler = useCallback((newTitle: string) => changeTaskTitle(todolistId, taskId, newTitle), [changeTaskTitle, todolistId, taskId])
     return (
         <div className={isDone ? styles.isDone : ''}>
             <Checkbox onChange={changeTaskStatusHandler} checked={isDone}/>
-
             <EditableSpan onChange={changeTaskTitleHandler} value={title}/>
-
             <IconButton onClick={removeTaskHandler}>
                 <Delete/>
             </IconButton>
-
         </div>
     )
 }
