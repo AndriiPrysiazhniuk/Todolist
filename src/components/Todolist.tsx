@@ -1,10 +1,12 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import {FilterValuesType} from "../App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {TasksList} from "./TasksList";
+import {useDispatch} from "react-redux";
+import {fetchTasksTC} from "../reducers/tasks-reducer";
 
 export type TaskType = {
     id: string
@@ -39,7 +41,10 @@ export const Todolist = React.memo((props: PropsType) => {
         filter,
         tasks
     } = props
-
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch<any>(fetchTasksTC(id))
+    }, [])
 
     const onFilterBtnClickHandler = useCallback((filter: FilterValuesType) => {
         changeFilter(id, filter)
