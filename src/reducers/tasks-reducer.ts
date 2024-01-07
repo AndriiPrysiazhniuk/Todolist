@@ -1,9 +1,8 @@
-import {TasksStateType} from "../App";
 import {v1} from "uuid";
 import {AddTodolistACType, RemoveTodolistACType, SetTodolistACType} from "./todolist-reducer";
-import {todolistApi} from "../api/todolist-api";
+import {TaskType, todolistApi, UpdateTaskModelType} from "../api/todolist-api";
 import {Dispatch} from "redux";
-import {TaskType} from "../components/Todolist";
+import {TasksStateType} from "../AppWithRedux";
 
 type ActionType =
     RemoveTaskACType
@@ -35,7 +34,8 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
                 ...state,
                 [action.todolistId]: state[action.todolistId].map(el => el.id === action.taskId ? {
                     ...el,
-                    isDone: action.isDone
+                    status: action.model.status
+                //     I am not confident if this work correctly
                 } : el)
             }
         case "CHANGE-TASK-TITLE":
@@ -77,8 +77,8 @@ export const removeTaskAC = (todolistId: string, taskId: string) => {
 export const addTaskAC = (todolistId: string, title: string) => {
     return {type: 'ADD-TASK', todolistId, title} as const
 }
-export const changeTaskStatusAC = (todolistId: string, taskId: string, isDone: boolean) => {
-    return {type: 'CHANGE-TASK-STATUS', todolistId, taskId, isDone} as const
+export const changeTaskStatusAC = (todolistId: string, taskId: string, model: UpdateTaskModelType) => {
+    return {type: 'CHANGE-TASK-STATUS', todolistId, taskId, model} as const
 }
 export const changeTaskTitleAC = (todolistId: string, taskId: string, title: string) => {
     return {type: 'CHANGE-TASK-TITLE', todolistId, taskId, title} as const
