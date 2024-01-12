@@ -5,7 +5,7 @@ import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {TasksList} from "./TasksList";
 import {fetchTasksTC} from "../reducers/tasks-reducer";
-import {TaskStatuses, TaskType, UpdateTaskModelType} from "../api/todolist-api";
+import {TaskStatuses, TaskType} from "../api/todolists-api";
 import {FilterValuesType} from "../reducers/todolist-reducer";
 import {useAppDispatch} from "../state/strore";
 
@@ -13,7 +13,7 @@ import {useAppDispatch} from "../state/strore";
 type PropsType = {
     title: string
     id: string
-    changeTaskStatus: (todolistId: string, taskId: string, model: UpdateTaskModelType) => void
+    changeTaskStatus: (todolistId: string, taskId: string, status: TaskStatuses) => void
     changeTaskTitle: (todolistId: string, taskId: string, newTitle: string) => void
     changeTodolistTitle: (todolistId: string, newTitle: string) => void
     addTask: (todolistId: string, title: string) => void
@@ -41,7 +41,7 @@ export const Todolist = React.memo((props: PropsType) => {
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(fetchTasksTC(id))
-    }, [])
+    }, [dispatch, id])
 
     const onFilterBtnClickHandler = useCallback((filter: FilterValuesType) => {
         changeFilter(id, filter)
@@ -59,7 +59,7 @@ export const Todolist = React.memo((props: PropsType) => {
     let tasksForTodolist = tasks
 
     if (filter === 'active') {
-        tasksForTodolist = tasksForTodolist.filter(el => el.status === TaskStatuses.Completed)
+        tasksForTodolist = tasksForTodolist.filter(el => el.status === TaskStatuses.New)
     }
     if (filter === 'completed') {
         tasksForTodolist = tasksForTodolist.filter(el => el.status === TaskStatuses.Completed)

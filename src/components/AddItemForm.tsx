@@ -18,7 +18,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
             addItem(inputValue.trim())
             setInputValue('')
         }
-        if (inputValue===''){
+        if (inputValue === '') {
             setError('Title is Required 😣')
         }
     }
@@ -35,7 +35,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
         }
     }
     return (
-        <div>
+        <div style={{'marginBottom': '10px'}}>
             <TextField error={!!error}
                        onKeyDown={onEnterPressHandler}
                        onChange={handleInputChanges}
