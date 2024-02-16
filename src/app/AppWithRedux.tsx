@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import {Todolist} from "./components/Todolist";
+import {Todolist} from "../components/Todolist";
 
-import {AddItemForm} from "./components/AddItemForm";
-import {Header} from "./components/Header";
+import {AddItemForm} from "../components/AddItemForm";
+import {Header} from "../components/Header";
 import Container from '@mui/material/Container/Container';
 import Grid from '@mui/material/Grid/Grid';
 import Paper from '@mui/material/Paper/Paper';
@@ -12,15 +12,16 @@ import {
     changeTaskStatusTC,
     changeTaskTitleTC,
     removeTaskTC
-} from "./reducers/tasks-reducer";
+} from "../reducers/tasks-reducer";
 import {
     addTodolistsTC,
     changeTodolistFilterAC,
     changeTodolistTitleTC, fetchTodolistsTC, FilterValuesType, removeTodolistsTC, TodolistDomainType
-} from "./reducers/todolist-reducer";
+} from "../reducers/todolist-reducer";
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "./state/strore";
-import {TaskStatuses, TaskType} from "./api/todolists-api";
+import {AppRootStateType, useAppDispatch} from "../state/strore";
+import {TaskStatuses, TaskType} from "../api/todolists-api";
+import {CustomizedSnackbar} from "../components/ErrorSnackbar/CustomizedSnackbar";
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
@@ -47,6 +48,7 @@ export const AppWithRedux = () => {
 
     return (
         <div>
+            <CustomizedSnackbar/>
             <Header/>
             <Container fixed>
                 <Grid container style={{padding: '20px'}}>
@@ -63,6 +65,7 @@ export const AppWithRedux = () => {
                                               removeTask={removeTask}
                                               changeFilter={changeFilter}
                                               addTask={addTask}
+                                              entityStatus={el.entityStatus}
                                               changeTaskStatus={changeTaskStatus}
                                               changeTaskTitle={changeTaskTitle}
                                               changeTodolistTitle={changeTodolistTitle}

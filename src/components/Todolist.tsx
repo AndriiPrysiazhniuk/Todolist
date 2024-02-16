@@ -8,9 +8,11 @@ import {fetchTasksTC} from "../reducers/tasks-reducer";
 import {TaskStatuses, TaskType} from "../api/todolists-api";
 import {FilterValuesType} from "../reducers/todolist-reducer";
 import {useAppDispatch} from "../state/strore";
+import {RequestStatusType} from "../reducers/app-reducer";
 
 
 type PropsType = {
+    entityStatus: RequestStatusType
     title: string
     id: string
     changeTaskStatus: (todolistId: string, taskId: string, status: TaskStatuses) => void
@@ -35,6 +37,7 @@ export const Todolist = React.memo((props: PropsType) => {
         removeTask,
         changeFilter,
         removeTodolist,
+        entityStatus,
         filter,
         tasks
     } = props
@@ -68,7 +71,7 @@ export const Todolist = React.memo((props: PropsType) => {
         <div>
             <h3>
                 <EditableSpan value={title} onChange={changeTodolistTitleHandler}/>
-                <IconButton onClick={removeTodolistHandler}>
+                <IconButton disabled={entityStatus === 'loading'} onClick={removeTodolistHandler}>
                     <Delete/>
                 </IconButton>
             </h3>
@@ -80,20 +83,21 @@ export const Todolist = React.memo((props: PropsType) => {
                                    todolistId={props.id}
                                    task={el}
                                    removeTask={removeTask}
+
                                    changeTaskStatus={changeTaskStatus}
                                    changeTaskTitle={changeTaskTitle}/>
                     )
                 })}
             </div>
             <div>
-                <Button variant={filter === 'all' ? 'outlined' : 'text'}
-                        color={'inherit'} onClick={() => onFilterBtnClickHandler('all')}>All
+                <Button variant={filter === 'all' ? 'outlined' : 'text'} color={'inherit'}
+                        onClick={() => onFilterBtnClickHandler('all')}>All
                 </Button>
-                <Button variant={filter === 'active' ? 'outlined' : 'text'}
-                        color={'primary'} onClick={() => onFilterBtnClickHandler('active')}>Active
+                <Button variant={filter === 'active' ? 'outlined' : 'text'} color={'primary'}
+                        onClick={() => onFilterBtnClickHandler('active')}>Active
                 </Button>
-                <Button variant={filter === 'completed' ? 'outlined' : 'text'}
-                        color={'error'} onClick={() => onFilterBtnClickHandler('completed')}>Completed
+                <Button variant={filter === 'completed' ? 'outlined' : 'text'} color={'error'}
+                        onClick={() => onFilterBtnClickHandler('completed')}>Completed
                 </Button>
             </div>
         </div>
