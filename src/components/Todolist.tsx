@@ -59,6 +59,12 @@ export const Todolist = React.memo((props: PropsType) => {
         changeTodolistTitle(id, newTitle)
     }, [changeTodolistTitle, id])
 
+    const filterTasks = (filter: FilterValuesType) => {
+        if (filter === 'all') {
+            return tasks
+        }
+        return tasks.filter(el => el.status === TaskStatuses.Completed)
+    }
     let tasksForTodolist = tasks
 
     if (filter === 'active') {

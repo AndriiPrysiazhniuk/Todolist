@@ -62,7 +62,7 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
             }))
         case "SET-TODOLIST-ENTITY-STATUS":
             return state.map(el => (
-                el.id ===action.id?{...el, entityStatus:action.status}:el
+                el.id === action.id ? {...el, entityStatus: action.status} : el
             ))
         default:
             return state;
@@ -111,10 +111,6 @@ export const removeTodolistsTC = (todolistId: string) => (dispatch: Dispatch) =>
 export const addTodolistsTC = (title: string) => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC('loading'))
     todolistsAPI.createTodolist(title)
-        // .then((res) => {
-        //     dispatch(addTodolistAC(res.data.data.item.id, res.data.data.item.title))
-        //     dispatch(setAppStatusAC('succeeded'))
-        // })
         .then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(addTodolistAC(res.data.data.item.id, res.data.data.item.title))
