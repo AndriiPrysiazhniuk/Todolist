@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Snackbar from '@mui/material/Snackbar'
 import MuiAlert, {AlertProps} from '@mui/material/Alert'
 
-import { useAppDispatch, useAppSelector} from "../../state/strore";
+import {useAppDispatch, useAppSelector} from "../../state/store";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -20,7 +20,7 @@ export const CustomizedSnackbar = () => {
         if (reason === 'clickaway') {
             return
         }
-     setOpen(null)
+        setOpen(null)
     }
     return (
         <Snackbar open={!!error} autoHideDuration={4000} onClose={handleClose}

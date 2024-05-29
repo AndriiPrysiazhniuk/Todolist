@@ -12,7 +12,7 @@ type PropsType = {
     changeTaskTitle: (todolistId: string, taskId: string, newTitle: string) => void
 }
 
-export const TasksList = (props: PropsType) => {
+export const Task = (props: PropsType) => {
     const {todolistId, task, removeTask, changeTaskStatus, changeTaskTitle} = props
 
     const removeTaskHandler = useCallback(() => removeTask(todolistId, task.id), [removeTask, todolistId, task.id])

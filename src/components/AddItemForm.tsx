@@ -4,12 +4,14 @@ import {AddBox} from "@mui/icons-material";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    disabled?: boolean
 }
 export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
-    const {addItem} = props
+    const {addItem, disabled = false} = props
 
     const [inputValue, setInputValue] = useState('')
     const [error, setError] = useState<string | null>(null)
+
     const onEnterPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (error !== null) {
             setError(null)
@@ -37,6 +39,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     return (
         <div style={{'marginBottom': '10px'}}>
             <TextField error={!!error}
+                       disabled={disabled}
                        onKeyDown={onEnterPressHandler}
                        onChange={handleInputChanges}
                        value={inputValue}

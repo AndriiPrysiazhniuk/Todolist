@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import React from "react";
 import {LinearProgress} from "@mui/material";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../state/strore";
+import {AppRootStateType} from "../state/store";
 import {RequestStatusType} from "../reducers/app-reducer";
 
 export const Header = () => {

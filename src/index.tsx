@@ -1,18 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {AppWithRedux} from "./app/AppWithRedux";
-import {store} from "./state/strore";
+import {App} from "../src/app/App";
+import {store} from "../src/state/store";
 import {Provider} from "react-redux";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {Login} from "@mui/icons-material";
+import {TodolistsList} from "../src/features/TodolistList/TodolistList";
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <App/>,
+        children: [
+            {
+                path: '/login',
+                element: <Login/>,
+            },
+            {
+                path: '/todolists',
+                element: <TodolistsList/>,
+            }
+        ]
+    }
+])
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     // <React.StrictMode>
-        <Provider store={store}>
-            <AppWithRedux/>
-        </Provider>
+    <Provider store={store}>
+        <RouterProvider router={router}/>
+    </Provider>
     // </React.StrictMode>
 );
 
