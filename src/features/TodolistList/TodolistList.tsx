@@ -8,7 +8,7 @@ import {
 } from "../../reducers/tasks-reducer";
 import {
     addTodolistsTC,
-    changeTodolistFilterAC,
+    changeTodolistFilterAC, changeTodolistFilterTC,
     changeTodolistTitleTC,
     fetchTodolistsTC, FilterValuesType,
     removeTodolistsTC, TodolistDomainType
@@ -27,8 +27,7 @@ export const TodolistsList: React.FC = React.memo(() => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const thunk = fetchTodolistsTC()
-        dispatch(thunk)
+        dispatch(fetchTodolistsTC())
     }, [])
 
     const removeTask = useCallback(function (todolistId: string, id: string) {
@@ -48,23 +47,20 @@ export const TodolistsList: React.FC = React.memo(() => {
     }, [])
 
     const changeFilter = useCallback(function (todolistId: string, value: FilterValuesType) {
-        dispatch(changeTodolistFilterAC(todolistId, value))
+        dispatch(changeTodolistFilterTC(todolistId, value))
     }, [])
 
     const removeTodolist = useCallback(function (id: string) {
-        const thunk = removeTodolistsTC(id)
-        dispatch(thunk)
+        dispatch(removeTodolistsTC(id))
     }, [])
 
     const changeTodolistTitle = useCallback(function (id: string, title: string) {
-        const thunk = changeTodolistTitleTC(id, title)
-        dispatch(thunk)
+        dispatch(changeTodolistTitleTC(id, title))
     }, [])
 
     const addTodolist = useCallback((title: string) => {
-        const thunk = addTodolistsTC(title)
-        dispatch(thunk)
-    }, [dispatch])
+        dispatch(addTodolistsTC(title))
+    }, [])
     return (
         <div>
             <Grid container style={{padding: '20px'}}>

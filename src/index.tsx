@@ -4,15 +4,21 @@ import './index.css';
 import {App} from "../src/app/App";
 import {store} from "../src/state/store";
 import {Provider} from "react-redux";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {Login} from "@mui/icons-material";
+import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
+import {Login} from "../src/features/Login/Login";
 import {TodolistsList} from "../src/features/TodolistList/TodolistList";
+import {ErrorPage} from "../src/components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <App/>,
+        errorElement: <Navigate to={'404'}/>,
         children: [
+            {
+                index: true,
+                element: <Navigate to={'/todolists'}/>
+            },
             {
                 path: '/login',
                 element: <Login/>,
@@ -21,7 +27,11 @@ const router = createBrowserRouter([
                 path: '/todolists',
                 element: <TodolistsList/>,
             }
-        ]
+        ],
+    },
+    {
+        path: '/404',
+        element: <ErrorPage/>,
     }
 ])
 

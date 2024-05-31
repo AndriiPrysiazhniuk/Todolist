@@ -10,14 +10,14 @@ import Button from '@mui/material/Button'
 
 export const Login = () => {
     return (
-        <Grid container justifyContent={'center'}>
+        <Grid marginTop={'45px'} container justifyContent={'center'}>
             <Grid item justifyContent={'center'}>
                 <FormControl>
                     <FormLabel>
                         <p>
-                            To log in get registered
+                            To log in get registered {' '}
                             <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>
-                                here
+                                 here
                             </a>
                         </p>
                         <p>or use common test account credentials:</p>

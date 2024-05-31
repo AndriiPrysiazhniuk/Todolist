@@ -38,12 +38,14 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     }
     return (
         <div style={{'marginBottom': '10px'}}>
-            <TextField error={!!error}
+            <TextField style={{backgroundColor: '#fff'}}
+                       error={!!error}
                        disabled={disabled}
                        onKeyDown={onEnterPressHandler}
                        onChange={handleInputChanges}
                        value={inputValue}
                        variant={'outlined'}
+                       color={'warning'}
                        label={error ? error : 'Type your task'}
                        size={'small'}/>
             <IconButton color={'primary'}
